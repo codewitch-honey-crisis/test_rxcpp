@@ -1,11 +1,13 @@
 #ifndef Example_H_HEADER
 #define Example_H_HEADER
+#include <stddef.h>
 #include <stdint.h>
 #ifdef ARDUINO
+#include <Arduino.h>
 #ifndef ESP32
+#ifndef CORE_TEENSY
 #include <avr/progmem.h>
-#else
-#include <progmem.h>
+#endif
 #endif
 #endif
 typedef struct Example_capture {

@@ -1,6 +1,6 @@
 #include "Example.h"
 int32_t JsonStringLiteral_dfa[]
-#ifdef ARDUINO
+#if defined(ARDUINO) && !defined(CORE_TEENSY) && !defined(ESP32)
 PROGMEM
 #endif
  = {
@@ -15,7 +15,7 @@ PROGMEM
 	6, 3, 48, 57, 65, 70, 97, 102
 };
 int32_t VerbatimStringLiteral_dfa[]
-#ifdef ARDUINO
+#if defined(ARDUINO) && !defined(CORE_TEENSY) && !defined(ESP32)
 PROGMEM
 #endif
  = {
@@ -24,7 +24,7 @@ PROGMEM
 	24, 1, 34, 34, 1, 1, 12, 1, 34, 34
 };
 int32_t StringLiteral_dfa[]
-#ifdef ARDUINO
+#if defined(ARDUINO) && !defined(CORE_TEENSY) && !defined(ESP32)
 PROGMEM
 #endif
  = {
@@ -33,7 +33,7 @@ PROGMEM
 	6, 1, 34, 34
 };
 int32_t CharacterLiteral_dfa[]
-#ifdef ARDUINO
+#if defined(ARDUINO) && !defined(CORE_TEENSY) && !defined(ESP32)
 PROGMEM
 #endif
  = {
@@ -44,7 +44,7 @@ PROGMEM
 	3, 1, 26, 1, 39, 39
 };
 int16_t IntegerLiteral_dfa[]
-#ifdef ARDUINO
+#if defined(ARDUINO) && !defined(CORE_TEENSY) && !defined(ESP32)
 PROGMEM
 #endif
  = {
@@ -93,7 +93,7 @@ PROGMEM
 	117, 117
 };
 int8_t FloatLiteral_dfa[]
-#ifdef ARDUINO
+#if defined(ARDUINO) && !defined(CORE_TEENSY) && !defined(ESP32)
 PROGMEM
 #endif
  = {
@@ -111,7 +111,7 @@ PROGMEM
 	101, 101
 };
 int8_t Whitespace_dfa[]
-#ifdef ARDUINO
+#if defined(ARDUINO) && !defined(CORE_TEENSY) && !defined(ESP32)
 PROGMEM
 #endif
  = {
@@ -119,7 +119,7 @@ PROGMEM
 	8, 2, 9, 13, 32, 32
 };
 int32_t Identifier_dfa[]
-#ifdef ARDUINO
+#if defined(ARDUINO) && !defined(CORE_TEENSY) && !defined(ESP32)
 PROGMEM
 #endif
  = {
@@ -354,7 +354,7 @@ PROGMEM
 	131072, 173782, 173824, 177972, 177984, 178205, 178208, 183969, 194560, 195101
 };
 int8_t CIdentifier_dfa[]
-#ifdef ARDUINO
+#if defined(ARDUINO) && !defined(CORE_TEENSY) && !defined(ESP32)
 PROGMEM
 #endif
  = {
@@ -363,7 +363,7 @@ PROGMEM
 	97, 122
 };
 int8_t CommentBlock_dfa[]
-#ifdef ARDUINO
+#if defined(ARDUINO) && !defined(CORE_TEENSY) && !defined(ESP32)
 PROGMEM
 #endif
  = {
@@ -371,7 +371,7 @@ PROGMEM
 	42, 42, 9, 0
 };
 int8_t CommentBlock_end_dfa[]
-#ifdef ARDUINO
+#if defined(ARDUINO) && !defined(CORE_TEENSY) && !defined(ESP32)
 PROGMEM
 #endif
  = {
@@ -388,8 +388,8 @@ Example_capture_t Example_runner32(int32_t* dfa, int32_t* blockEnd, unsigned lon
 	int32_t prlen;
 	int32_t pmin;
 	int32_t pmax;
-	uint32_t i, j;
-	uint32_t ch;
+	int32_t i, j;
+	int32_t ch;
 	int32_t state = 0;
 	int32_t acc = -1;
 	int done;
@@ -403,7 +403,7 @@ Example_capture_t Example_runner32(int32_t* dfa, int32_t* blockEnd, unsigned lon
 		while (!done) {
 start_dfa:
 			done = 1;
-#ifdef ARDUINO
+#if defined(ARDUINO) && !defined(CORE_TEENSY) && !defined(ESP32)
 			acc = (int32_t)pgm_read_dword((uint32_t*)(dfa + (state++)));
 			tlen = (int32_t)pgm_read_dword((uint32_t*)(dfa + (state++)));
 #else
@@ -411,7 +411,7 @@ start_dfa:
 			tlen = dfa[state++];
 #endif
 			for (i = 0; i < tlen; ++i) {
-#ifdef ARDUINO
+#if defined(ARDUINO) && !defined(CORE_TEENSY) && !defined(ESP32)
 				tto = (int32_t)pgm_read_dword((uint32_t*)(dfa + (state++)));
 				prlen = (int32_t)pgm_read_dword((uint32_t*)(dfa + (state++)));
 #else
@@ -419,7 +419,7 @@ start_dfa:
 				prlen = dfa[state++];
 #endif
 				for (j = 0; j < prlen; ++j) {
-#ifdef ARDUINO
+#if defined(ARDUINO) && !defined(CORE_TEENSY) && !defined(ESP32)
 					pmin = (int32_t)pgm_read_dword((uint32_t*)(dfa + (state++)));
 					pmax = (int32_t)pgm_read_dword((uint32_t*)(dfa + (state++)));
 #else
@@ -450,7 +450,7 @@ start_dfa:
 						while (!done) {
 start_block_end:
 							done = 1;
-#ifdef ARDUINO
+#if defined(ARDUINO) && !defined(CORE_TEENSY) && !defined(ESP32)
 							acc = (int32_t)pgm_read_dword((uint32_t*)(blockEnd + (state++)));
 							tlen = (int32_t)pgm_read_dword((uint32_t*)(blockEnd + (state++)));
 #else
@@ -458,7 +458,7 @@ start_block_end:
 							tlen = blockEnd[state++];
 #endif
 							for (i = 0; i < tlen; ++i) {
-#ifdef ARDUINO
+#if defined(ARDUINO) && !defined(CORE_TEENSY) && !defined(ESP32)
 								tto = (int32_t)pgm_read_dword((uint32_t*)(blockEnd + (state++)));
 								prlen = (int32_t)pgm_read_dword((uint32_t*)(blockEnd + (state++)));
 #else
@@ -466,7 +466,7 @@ start_block_end:
 								prlen = blockEnd[state++];
 #endif
 								for (j = 0; j < prlen; ++j) {
-#ifdef ARDUINO
+#if defined(ARDUINO) && !defined(CORE_TEENSY) && !defined(ESP32)
 									pmin = (int32_t)pgm_read_dword((uint32_t*)(blockEnd + (state++)));
 									pmax = (int32_t)pgm_read_dword((uint32_t*)(blockEnd + (state++)));
 #else
@@ -529,8 +529,8 @@ Example_capture_t Example_runner16(int16_t* dfa, int16_t* blockEnd, unsigned lon
 	int16_t prlen;
 	int16_t pmin;
 	int16_t pmax;
-	uint32_t i, j;
-	uint32_t ch;
+	int32_t i, j;
+	int32_t ch;
 	int16_t state = 0;
 	int16_t acc = -1;
 	int done;
@@ -544,7 +544,7 @@ Example_capture_t Example_runner16(int16_t* dfa, int16_t* blockEnd, unsigned lon
 		while (!done) {
 start_dfa:
 			done = 1;
-#ifdef ARDUINO
+#if defined(ARDUINO) && !defined(CORE_TEENSY) && !defined(ESP32)
 			acc = (int16_t)pgm_read_word((uint16_t*)(dfa + (state++)));
 			tlen = (int16_t)pgm_read_word((uint16_t*)(dfa + (state++)));
 #else
@@ -552,7 +552,7 @@ start_dfa:
 			tlen = dfa[state++];
 #endif
 			for (i = 0; i < tlen; ++i) {
-#ifdef ARDUINO
+#if defined(ARDUINO) && !defined(CORE_TEENSY) && !defined(ESP32)
 				tto = (int16_t)pgm_read_word((uint16_t*)(dfa + (state++)));
 				prlen = (int16_t)pgm_read_word((uint16_t*)(dfa + (state++)));
 #else
@@ -560,7 +560,7 @@ start_dfa:
 				prlen = dfa[state++];
 #endif
 				for (j = 0; j < prlen; ++j) {
-#ifdef ARDUINO
+#if defined(ARDUINO) && !defined(CORE_TEENSY) && !defined(ESP32)
 					pmin = (int16_t)pgm_read_word((uint16_t*)(dfa + (state++)));
 					pmax = (int16_t)pgm_read_word((uint16_t*)(dfa + (state++)));
 #else
@@ -591,7 +591,7 @@ start_dfa:
 						while (!done) {
 start_block_end:
 							done = 1;
-#ifdef ARDUINO
+#if defined(ARDUINO) && !defined(CORE_TEENSY) && !defined(ESP32)
 							acc = (int16_t)pgm_read_word((uint16_t*)(blockEnd + (state++)));
 							tlen = (int16_t)pgm_read_word((uint16_t*)(blockEnd + (state++)));
 #else
@@ -599,7 +599,7 @@ start_block_end:
 							tlen = blockEnd[state++];
 #endif
 							for (i = 0; i < tlen; ++i) {
-#ifdef ARDUINO
+#if defined(ARDUINO) && !defined(CORE_TEENSY) && !defined(ESP32)
 								tto = (int16_t)pgm_read_word((uint16_t*)(blockEnd + (state++)));
 								prlen = (int16_t)pgm_read_word((uint16_t*)(blockEnd + (state++)));
 #else
@@ -607,7 +607,7 @@ start_block_end:
 								prlen = blockEnd[state++];
 #endif
 								for (j = 0; j < prlen; ++j) {
-#ifdef ARDUINO
+#if defined(ARDUINO) && !defined(CORE_TEENSY) && !defined(ESP32)
 									pmin = (int16_t)pgm_read_word((uint16_t*)(blockEnd + (state++)));
 									pmax = (int16_t)pgm_read_word((uint16_t*)(blockEnd + (state++)));
 #else
@@ -670,8 +670,8 @@ Example_capture_t Example_runner8(int8_t* dfa, int8_t* blockEnd, unsigned long l
 	int8_t prlen;
 	int8_t pmin;
 	int8_t pmax;
-	uint32_t i, j;
-	uint32_t ch;
+	int32_t i, j;
+	int32_t ch;
 	int8_t state = 0;
 	int8_t acc = -1;
 	int done;
@@ -685,7 +685,7 @@ Example_capture_t Example_runner8(int8_t* dfa, int8_t* blockEnd, unsigned long l
 		while (!done) {
 start_dfa:
 			done = 1;
-#ifdef ARDUINO
+#if defined(ARDUINO) && !defined(CORE_TEENSY) && !defined(ESP32)
 			acc = (int8_t)pgm_read_byte((uint8_t*)(dfa + (state++)));
 			tlen = (int8_t)pgm_read_byte((uint8_t*)(dfa + (state++)));
 #else
@@ -693,7 +693,7 @@ start_dfa:
 			tlen = dfa[state++];
 #endif
 			for (i = 0; i < tlen; ++i) {
-#ifdef ARDUINO
+#if defined(ARDUINO) && !defined(CORE_TEENSY) && !defined(ESP32)
 				tto = (int8_t)pgm_read_byte((uint8_t*)(dfa + (state++)));
 				prlen = (int8_t)pgm_read_byte((uint8_t*)(dfa + (state++)));
 #else
@@ -701,7 +701,7 @@ start_dfa:
 				prlen = dfa[state++];
 #endif
 				for (j = 0; j < prlen; ++j) {
-#ifdef ARDUINO
+#if defined(ARDUINO) && !defined(CORE_TEENSY) && !defined(ESP32)
 					pmin = (int8_t)pgm_read_byte((uint8_t*)(dfa + (state++)));
 					pmax = (int8_t)pgm_read_byte((uint8_t*)(dfa + (state++)));
 #else
@@ -732,7 +732,7 @@ start_dfa:
 						while (!done) {
 start_block_end:
 							done = 1;
-#ifdef ARDUINO
+#if defined(ARDUINO) && !defined(CORE_TEENSY) && !defined(ESP32)
 							acc = (int8_t)pgm_read_byte((uint8_t*)(blockEnd + (state++)));
 							tlen = (int8_t)pgm_read_byte((uint8_t*)(blockEnd + (state++)));
 #else
@@ -740,7 +740,7 @@ start_block_end:
 							tlen = blockEnd[state++];
 #endif
 							for (i = 0; i < tlen; ++i) {
-#ifdef ARDUINO
+#if defined(ARDUINO) && !defined(CORE_TEENSY) && !defined(ESP32)
 								tto = (int8_t)pgm_read_byte((uint8_t*)(blockEnd + (state++)));
 								prlen = (int8_t)pgm_read_byte((uint8_t*)(blockEnd + (state++)));
 #else
@@ -748,7 +748,7 @@ start_block_end:
 								prlen = blockEnd[state++];
 #endif
 								for (j = 0; j < prlen; ++j) {
-#ifdef ARDUINO
+#if defined(ARDUINO) && !defined(CORE_TEENSY) && !defined(ESP32)
 									pmin = (int8_t)pgm_read_byte((uint8_t*)(blockEnd + (state++)));
 									pmax = (int8_t)pgm_read_byte((uint8_t*)(blockEnd + (state++)));
 #else
